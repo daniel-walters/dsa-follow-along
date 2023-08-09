@@ -18,7 +18,7 @@ func NewLinkedList[T any]() LinkedList[T] {
 	return LinkedList[T]{length: 0}
 }
 
-func newNode[T any](value T) *linkedListNode[T] {
+func newListNode[T any](value T) *linkedListNode[T] {
 	return &linkedListNode[T]{value: value}
 }
 
@@ -28,7 +28,7 @@ func (list *LinkedList[T]) InsertAt(item T, index int) error {
 		return err
 	}
 
-	newNode := newNode(item)
+	newNode := newListNode(item)
 	list.length++
 
     prevNode := currentNode.prev
@@ -62,7 +62,7 @@ func (list *LinkedList[T]) RemoveAt(index int) (T, error) {
 }
 
 func (list *LinkedList[T]) Append(item T) {
-	node := newNode(item)
+	node := newListNode(item)
 	list.length++
 
 	if list.head == nil && list.tail == nil {
@@ -78,7 +78,7 @@ func (list *LinkedList[T]) Append(item T) {
 }
 
 func (list *LinkedList[T]) Prepend(item T) {
-	node := newNode(item)
+	node := newListNode(item)
 	list.length++
 
 	if list.head == nil && list.tail == nil {

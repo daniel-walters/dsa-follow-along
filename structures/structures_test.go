@@ -44,10 +44,41 @@ func TestLinkedLinked(t *testing.T) {
 	if value != 6 {
 		t.Errorf("incorrect value, recieved: %d", value)
 	}
+}
 
-	for i := 0; i < list.Length(); i++ {
-		v, _ := list.Get(i)
-		println(v)
+func TestQueue(t *testing.T) {
+	queue := structures.NewQueue[int]()
+	queue.Enqueue(1)
+	queue.Enqueue(2)
+	queue.Enqueue(3)
+
+	if queue.Length() != 3 {
+		t.Errorf("Incorrect length, recieved %d", queue.Length())
+	}
+
+	if v, _ := queue.Peek(); v != 1 {
+		t.Errorf("Incorrect value, recieved %d", v)
+	}
+
+	if v, _ := queue.Dequeue(); v != 1 {
+		t.Errorf("Incorrect value, recieved %d", v)
+	}
+
+	if v, _ := queue.Peek(); v != 2 {
+		t.Errorf("Incorrect value, recieved %d", v)
+	}
+
+	if queue.Length() != 2 {
+		t.Errorf("Incorrect length, recieved %d", queue.Length())
+	}
+
+	queue.Dequeue()
+	queue.Dequeue()
+
+	if _, e := queue.Dequeue(); e == nil {
+		t.Error("Expected error, recieved nil")
+	}
+}
 	}
 
 }
