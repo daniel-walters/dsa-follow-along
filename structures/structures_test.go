@@ -79,6 +79,37 @@ func TestQueue(t *testing.T) {
 		t.Error("Expected error, recieved nil")
 	}
 }
+
+func TestStack(t *testing.T) {
+	stack := structures.NewStack[int]()
+	stack.Push(1)
+	stack.Push(2)
+	stack.Push(3)
+
+	if stack.Length() != 3 {
+		t.Errorf("Incorrect length, recieved %d", stack.Length())
 	}
 
+	if v, _ := stack.Peek(); v != 3 {
+		t.Errorf("Incorrect value, recieved %d", v)
+	}
+
+	if v, _ := stack.Pop(); v != 3 {
+		t.Errorf("Incorrect value, recieved %d", v)
+	}
+
+	if v, _ := stack.Peek(); v != 2 {
+		t.Errorf("Incorrect value, recieved %d", v)
+	}
+
+	if stack.Length() != 2 {
+		t.Errorf("Incorrect length, recieved %d", stack.Length())
+	}
+
+	stack.Pop()
+	stack.Pop()
+
+	if v, e := stack.Pop(); e == nil {
+		t.Errorf("Expected error, recieved %d", v)
+	}
 }
