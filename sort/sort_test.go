@@ -14,3 +14,12 @@ func TestBubbleSort(t *testing.T) {
 		t.Errorf("Expected: %+v, Receieved: %+v", expected, array)
 	}
 }
+
+func TestQuickSort(t *testing.T) {
+	array := []int{11, 3, 9, 6, 1, 5, 9, 23, 2}
+	expected := []int{1, 2, 3, 5, 6, 9, 9, 11, 23}
+	sort.QuickSort(array)
+	if !reflect.DeepEqual(array, expected) {
+		t.Errorf("Expected: %+v, Receieved: %+v", expected, array)
+	}
+}
