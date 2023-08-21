@@ -1,6 +1,8 @@
 package structures
 
-import "errors"
+import (
+	"errors"
+)
 
 type queueNode[T any] struct {
 	value T
@@ -27,12 +29,12 @@ func (q *Queue[T]) Enqueue(item T) {
 	q.length++
 	node := newQueueNode(item)
 
-    if q.head == nil && q.tail == nil {
-        q.head = node
-        q.tail = node
+	if q.head == nil && q.tail == nil {
+		q.head = node
+		q.tail = node
 
-        return
-    }
+		return
+	}
 
 	q.tail.next = node
 	q.tail = node
@@ -43,11 +45,15 @@ func (q *Queue[T]) Dequeue() (T, error) {
 		return *(new(T)), ErrorEmptyQueue
 	}
 
-    q.length--
+	q.length--
 
 	node := q.head
 	q.head = node.next
 	node.next = nil
+
+	if q.length == 0 {
+		q.tail = nil
+	}
 
 	return node.value, nil
 }
