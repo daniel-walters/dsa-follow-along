@@ -1,14 +1,14 @@
 package tree
 
 type BinaryTreeNode[T any] struct {
-	value T
+	Value T
 	Left  *BinaryTreeNode[T]
 	Right *BinaryTreeNode[T]
 }
 
 func NewBinaryTreeNode[T any](value T) BinaryTreeNode[T] {
 	return BinaryTreeNode[T]{
-		value: value,
+		Value: value,
 	}
 }
 
@@ -25,7 +25,7 @@ func pre_walk[T any](node *BinaryTreeNode[T], path *[]T) {
 		return
 	}
 
-	*path = append(*path, node.value)
+	*path = append(*path, node.Value)
 	pre_walk(node.Left, path)
 	pre_walk(node.Right, path)
 

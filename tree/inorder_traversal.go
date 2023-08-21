@@ -14,6 +14,6 @@ func in_walk[T any](node *BinaryTreeNode[T], path *[]T) {
 	}
 
 	in_walk(node.Left, path)
-	*path = append(*path, node.value)
+	*path = append(*path, node.Value)
 	in_walk(node.Right, path)
 }

@@ -54,3 +54,20 @@ func TestPostOrder(t *testing.T) {
 		t.Errorf("Expected: %+v, Receieved: %+v", expected, actual)
 	}
 }
+
+func TestBreadthFirstSearch(t *testing.T) {
+	head := create_traversal_graph()
+	expected := true
+	actual := tree.BreadthFirstSearch(head, 3)
+
+	if actual != expected {
+		t.Errorf("Expected: %t, Receieved: %t", expected, actual)
+	}
+
+	expected = false
+	actual = tree.BreadthFirstSearch(head, 100)
+
+	if actual != expected {
+		t.Errorf("Expected: %t, Receieved: %t", expected, actual)
+	}
+}

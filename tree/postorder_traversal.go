@@ -15,5 +15,5 @@ func post_walk[T any](node *BinaryTreeNode[T], path *[]T) {
 
 	post_walk(node.Left, path)
 	post_walk(node.Right, path)
-	*path = append(*path, node.value)
+	*path = append(*path, node.Value)
 }
