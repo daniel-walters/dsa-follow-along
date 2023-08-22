@@ -113,3 +113,46 @@ func TestStack(t *testing.T) {
 		t.Errorf("Expected error, recieved %d", v)
 	}
 }
+
+func TestHeap(t *testing.T) {
+	heap := structures.NewMinHeap[int]()
+	heap.Insert(50)
+	heap.Insert(71)
+	heap.Insert(100)
+	heap.Insert(101)
+	heap.Insert(80)
+	heap.Insert(200)
+	heap.Insert(102)
+	heap.Insert(3)
+
+	tests := []struct {
+		expectedOut    int
+		expectedLength int
+	}{
+		{3, 7},
+		{50, 6},
+		{71, 5},
+		{80, 4},
+		{100, 3},
+		{101, 2},
+		{102, 1},
+		{200, 0},
+	}
+
+	for _, test := range tests {
+		out, _ := heap.Delete()
+		l := heap.Length()
+
+		if test.expectedOut != out {
+			t.Errorf("Incorrect value, recieved %d, expected %d", out, test.expectedOut)
+		}
+		if test.expectedLength != l {
+			t.Errorf("Incorrect Length, recieved %d, expected %d", l, test.expectedLength)
+		}
+
+	}
+
+	if _, e := heap.Delete(); e == nil {
+		t.Errorf("Expected error")
+	}
+}
