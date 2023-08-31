@@ -25,8 +25,38 @@ func TestBFS(t *testing.T) {
 		t.Errorf("Expected %+v, got %+v", expected, actual)
 	}
 
-    if actual, err = graph.BFS(graph_matrix, 3, 0); err == nil {
-        t.Errorf("Expected error, receieved %+v", actual)
+	if actual, err = graph.BFS(graph_matrix, 3, 0); err == nil {
+		t.Errorf("Expected error, receieved %+v", actual)
+	}
+}
+
+func TestDFS(t *testing.T) {
+	graph_list := graph.WeightedAdjacencyList{
+		{
+			graph.GraphEdge{To: 1, Weight: 1},
+			graph.GraphEdge{To: 2, Weight: 4},
+			graph.GraphEdge{To: 3, Weight: 5},
+		},
+		{graph.GraphEdge{To: 0, Weight: 1}},
+		{graph.GraphEdge{To: 3, Weight: 2}},
+		{graph.GraphEdge{To: 4, Weight: 5}},
+		{},
+	}
+
+	expected := []int{0, 2, 3, 4}
+	actual, err := graph.DFS(graph_list, 0, 4)
+
+	if err != nil {
+		t.Error("Expected to find a path from 0 to 4")
+	}
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected %+v, got %+v", expected, actual)
+	}
+
+	if actual, err = graph.DFS(graph_list, 3, 0); err == nil {
+		t.Errorf("Expected error, receieved %+v", actual)
+	}
+}
 
 func TestDijstras(t *testing.T) {
 	graph_list := graph.WeightedAdjacencyList{
