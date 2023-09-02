@@ -156,3 +156,39 @@ func TestHeap(t *testing.T) {
 		t.Errorf("Expected error")
 	}
 }
+
+func TestLRU(t *testing.T) {
+	lru := structures.NewLRU[string, int](3)
+
+	if v, err := lru.Get("foo"); err == nil {
+		t.Errorf("Expected error, got %d", v)
+	}
+
+	lru.Update("foo", 1)
+	if v, _ := lru.Get("foo"); v != 1 {
+		t.Errorf("Expected 1, got %d", v)
+	}
+
+	lru.Update("bar", 2)
+	if v, _ := lru.Get("bar"); v != 2 {
+		t.Errorf("Expected 2, got %d", v)
+	}
+
+	lru.Update("baz", 3)
+	if v, _ := lru.Get("baz"); v != 3 {
+		t.Errorf("Expected 3, got %d", v)
+	}
+
+	lru.Update("asd", 4)
+	if v, _ := lru.Get("asd"); v != 4 {
+		t.Errorf("Expected 4, got %d", v)
+	}
+	if v, e := lru.Get("foo"); e == nil {
+		t.Errorf("Expected error, got %d", v)
+	}
+	lru.Get("bar")
+	lru.Update("foo", 1)
+	if v, e := lru.Get("baz"); e == nil {
+		t.Errorf("Expected error, got %d", v)
+	}
+}

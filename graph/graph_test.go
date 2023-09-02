@@ -70,13 +70,13 @@ func TestDijstras(t *testing.T) {
 		},
 		{graph.GraphEdge{To: 4, Weight: 1}},
 		{graph.GraphEdge{To: 2, Weight: 1}},
-        {},
+		{},
 	}
 
-    expected := []int{0, 2, 4}
-    actual := graph.DijkstraList(0, 4, graph_list)
+	expected := []int{0, 2, 4}
+	actual := graph.DijkstraList(0, 4, graph_list)
 
-    if !reflect.DeepEqual(actual, expected) {
+	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Expected %+v, got %+v", expected, actual)
-    }
+	}
 }
